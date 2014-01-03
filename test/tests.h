@@ -1,6 +1,6 @@
 
 /**
- * `test/tests.h' - libidna
+ * `test/tests.h' - libsphia
  *
  * Copyright (C) 2014 The libsphia Authors <sphia@googlegroups.com>
  */
