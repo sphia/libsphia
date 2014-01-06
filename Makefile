@@ -95,6 +95,7 @@ clean:
 	$(RM) -f $(TARGET_DSO).$(VERSION_MAJOR)
 	$(RM) -f $(TARGET_DSO)
 	$(RM) -f $(TARGET_DYLIB)
+	$(RM) -fr test-db
 
 install:
 	test -d $(PREFIX)/$(DESTDIR) || mkdir $(PREFIX)/$(DESTDIR)

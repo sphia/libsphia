@@ -19,5 +19,13 @@ main (void) {
 
   // run all tests
 
+  // new
+  RUN(new_db_create);
+  RUN(new_db_existing);
+
+  // free
+  RUN(free_empty);
+  RUN(free_new_db);
+
   FOOTER();
 }
