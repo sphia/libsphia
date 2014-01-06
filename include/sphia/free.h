@@ -5,8 +5,8 @@
  * Copyright (C) 2014 The libsphia Authors <sphia@googlegroups.com>
  */
 
-#ifndef SPHIA_NEW_H
-#define SPHIA_NEW_H 1
+#ifndef SPHIA_FREE_H
+#define SPHIA_FREE_H 1
 #ifdef __cplusplus
 extern "C" {
 #endif
