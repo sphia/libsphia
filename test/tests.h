@@ -37,4 +37,12 @@
  * A list of all the test to run
  */
 
+// new
+TEST(new_db_create);
+TEST(new_db_existing);
+
+// free
+TEST(free_empty);
+TEST(free_new_db);
+
 #endif
