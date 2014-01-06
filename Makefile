@@ -25,10 +25,15 @@ TARGET_DYLIB = $(TARGET_NAME).$(VERSION_MAJOR).$(VERSION_MINOR).dylib
 TARGET_DSO = $(TARGET_NAME).so
 
 CFLAGS ?= -Iinclude -Ideps \
-					-std=c99 -Wall -O2 -fvisibility=hidden -fPIC -pedantic
+					-std=c99 -Wall -O2 \
+					-fvisibility=hidden \
+					-fPIC -pedantic
 
-LDFLAGS ?= -shared -soname $(TARGET_DSO).$(VERSION_MAJOR)
-OSX_LDFLAGS ?= -lc -Wl,-install_name,$(TARGET_DSO), -o $(TARGET_DSOLIB)
+LDFLAGS ?= -shared -soname $(TARGET_DSO).$(VERSION_MAJOR) -lsophia
+OSX_LDFLAGS ?= -lc \
+							-Wl,-install_name,$(TARGET_DSO), \
+							-o $(TARGET_DSOLIB) \
+							-lsophia
 
 SRC = $(wildcard src/*.c)
 SRC += $(STATIC_DEPS)
@@ -77,7 +82,7 @@ check: test
 
 test: $(TEST_OBJS)
 	$(CC) $(TEST_OBJS) test.c $(STATIC_DEPS) \
-		./$(TARGET_STATIC) $(CFLAGS) -o $(TEST_MAIN)
+		./$(TARGET_STATIC) $(CFLAGS) -o $(TEST_MAIN) -lsophia
 	./$(TEST_MAIN)
 
 clean:
