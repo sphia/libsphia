@@ -29,11 +29,15 @@ CFLAGS ?= -Iinclude -Ideps \
 					-fvisibility=hidden \
 					-fPIC -pedantic
 
-LDFLAGS ?= -shared -soname $(TARGET_DSO).$(VERSION_MAJOR) -lsophia
+LDFLAGS ?= -shared \
+					 -soname $(TARGET_DSO).$(VERSION_MAJOR) \
+					 -lsophia \
+					 -lpthread
 OSX_LDFLAGS ?= -lc \
 							-Wl,-install_name,$(TARGET_DSO), \
 							-o $(TARGET_DSOLIB) \
-							-lsophia
+							-lsophia \
+							-lpthread
 
 SRC = $(wildcard src/*.c)
 SRC += $(STATIC_DEPS)
@@ -81,8 +85,10 @@ check: test
 	$(VALGRIND) --leak-check=full ./$(TEST_MAIN)
 
 test: $(TEST_OBJS)
-	$(CC) $(TEST_OBJS) test.c $(STATIC_DEPS) \
-		./$(TARGET_STATIC) $(CFLAGS) -o $(TEST_MAIN) -lsophia
+	$(CC) $(TEST_OBJS) test.c \
+		$(STATIC_DEPS) ./$(TARGET_STATIC) \
+		$(CFLAGS) -o $(TEST_MAIN) \
+		-lsophia -lpthread
 	./$(TEST_MAIN)
 
 clean:
