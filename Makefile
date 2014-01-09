@@ -13,7 +13,7 @@ LIB_NAME = sphia
 VERSION_MAJOR = 0
 VERSION_MINOR = 1
 
-DEPS = $(shell ls deps/)
+DEPS = $(test -d deps && shell ls deps/)
 STATIC_DEPS = $(wildcard deps/*/*.a)
 
 TARGET_NAME = lib$(LIB_NAME)
@@ -22,20 +22,21 @@ TARGET_DSOLIB = $(TARGET_NAME).so.$(VERSION_MAJOR).$(VERSION_MINOR)
 TARGET_DYLIB = $(TARGET_NAME).$(VERSION_MAJOR).$(VERSION_MINOR).dylib
 TARGET_DSO = $(TARGET_NAME).so
 
-CFLAGS += -Iinclude -Ideps \
-					-std=c99 -Wall -O2 \
+CFLAGS ?= -Iinclude -Ideps    \
+					-std=c99 -Wall -O2  \
 					-fvisibility=hidden \
 					-fPIC -pedantic
 
-LDFLAGS += -shared \
-					 -soname $(TARGET_DSO).$(VERSION_MAJOR) \
-					 -lsophia \
-					 -lpthread
-OSX_LDFLAGS += -lc \
-							-Wl,-install_name,$(TARGET_DSO), \
-							-o $(TARGET_DSOLIB) \
-							-lsophia \
-							-lpthread
+LDFLAGS ?= -shared   \
+					 -lsophia  \
+					 -lpthread \
+					 -soname $(TARGET_DSO).$(VERSION_MAJOR)
+
+OSX_LDFLAGS ?= -lc \
+							 -Wl,-install_name,$(TARGET_DSO) \
+							 -o $(TARGET_DSOLIB) \
+							 -lsophia \
+							 -lpthread
 
 SRC = $(wildcard src/*.c)
 SRC += $(STATIC_DEPS)

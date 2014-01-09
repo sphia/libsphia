@@ -11,16 +11,18 @@
 extern "C" {
 #endif
 
-typedef struct {
-  const char *path;
-  void *db;
-  void *env;
-} sphia_t;
+
 
 #include <sophia/sophia.h>
 #include <sophia/sp.h>
+
+// api
 #include "sphia/new.h"
 #include "sphia/free.h"
+#include "sphia/get.h"
+#include "sphia/set.h"
+#include "sphia/rm.h"
+#include "sphia/clear.h"
 
 #ifdef __cplusplus
 }

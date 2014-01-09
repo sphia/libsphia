@@ -1,24 +1,34 @@
 
 /**
- * `test/tests.h' - libsphia
+ * `test.h' - libsphia
  *
  * Copyright (C) 2014 The libsphia Authors <sphia@googlegroups.com>
  */
 
-#ifndef SPHIA_TESTS_H
-#define SPHIA_TESTS_H 1
+#ifndef SPHIA_TEST_H
+#define SPHIA_TEST_H 1
 
 #include <stdio.h>
 #include <assert.h>
 
+static int TESTS_PASSED = 0;
+static int TESTS_FAILED = 0;
+
+#ifndef TMPDIR
+#define TMPDIR "/tmp"
+#endif
+
+#define SPHIA_TEST_DB TMPDIR "/sphia-test-db"
+
 #define HEADER(n) \
-  printf("\n[running '%s' tests]\n\n", #n)
+  printf("\nrunning '%s' test(s)\n", #n); \
+  printf("-------------------------\n\n");
 
 #define FOOTER()                            \
-  printf("\n--\n");                         \
+  printf("\n\n");                           \
   printf("  passed: (%d)\n", TESTS_PASSED); \
   printf("  failed: (%d)\n", TESTS_FAILED); \
-  printf("--\n");                           \
+  printf("\n");                             \
   return (TESTS_FAILED > 0) ? 1 : 0
 
 #define RUN(n)                              \
@@ -38,11 +48,21 @@
  */
 
 // new
-TEST(new_db_create);
-TEST(new_db_existing);
+TEST(new);
 
 // free
-TEST(free_empty);
-TEST(free_new_db);
+TEST(free);
+
+// get
+TEST(get);
+
+// set
+TEST(set);
+
+// rm
+TEST(rm);
+
+// clear
+TEST(clear);
 
 #endif

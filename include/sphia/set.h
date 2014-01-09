@@ -11,6 +11,12 @@
 extern "C" {
 #endif
 
+#include "common.h"
+#include "sphia.h"
+
+SPHIA_EXTERN int
+sphia_set (sphia_t *, const char *, const char *);
+
 #ifdef __cplusplus
 }
 #endif

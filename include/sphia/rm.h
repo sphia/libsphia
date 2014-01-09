@@ -1,12 +1,12 @@
 
 /**
- * `clear.h' - libsphia
+ * `rm.h' - libsphia
  *
  * Copyright (C) 2014 The libsphia Authors <sphia@googlegroups.com>
  */
 
-#ifndef SPHIA_CLEAR_H
-#define SPHIA_CLEAR_H 1
+#ifndef SPHIA_RM_H
+#define SPHIA_RM_H 1
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -15,14 +15,13 @@ extern "C" {
 #include "sphia.h"
 
 /**
- * Remove all keys from the given `sphia` instance.
+ * Remove `key` from the given `sphia` instance.
  *
  * Returns 0 on success, -1 on failure.
  */
 
 SPHIA_EXTERN int
-sphia_clear (sphia_t *);
-
+sphia_rm (sphia_t *, const char *);
 
 #ifdef __cplusplus
 }
