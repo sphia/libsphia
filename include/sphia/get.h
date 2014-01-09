@@ -17,7 +17,7 @@ extern "C" {
 /**
  * Get the value of `key` in the given `sphia`
  * instance.  The returned value will always
- * be NUL terminated.
+ * be NULL terminated.
  *
  * Returns NULL on error.
  */

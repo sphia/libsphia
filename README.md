@@ -22,7 +22,7 @@
 
 ### char *sphia_get(sphia_t *sphia, const char *key)
 
-  Get the value of `key` in the given `sphia` instance.  The returned value will always be NUL terminated.
+  Get the value of `key` in the given `sphia` instance.  The returned value will always be NULL terminated.
 
   Returns NULL on error.
 
