@@ -14,6 +14,12 @@
 static int TESTS_PASSED = 0;
 static int TESTS_FAILED = 0;
 
+#ifndef TMPDIR
+#define TMPDIR "/tmp"
+#endif
+
+#define SPHIA_TEST_DB TMPDIR "/sphia-test-db"
+
 #define HEADER(n) \
   printf("\nrunning '%s' test(s)\n", #n); \
   printf("-------------------------\n\n");

@@ -12,16 +12,16 @@
 #include <sphia/set.h>
 #include <sphia/test.h>
 
-TEST(simple_set);
+TEST(set_simple);
 
 TEST(set) {
   HEADER(sphia_set);
-  RUN(simple_set);
+  RUN(set_simple);
   FOOTER();
 }
 
-TEST(simple_set) {
-  sphia_t *sphia = sphia_new("./test-db");
+TEST(set_simple) {
+  sphia_t *sphia = sphia_new(SPHIA_TEST_DB);
   assert(sphia);
 
   char key[] = "key";
@@ -33,5 +33,10 @@ TEST(simple_set) {
   assert(0 == rc);
 
   sphia_free(sphia);
+  return 0;
+}
+
+TEST(set_similar) {
+  sphia_t *sphia = sphia_new(SPHIA_TEST_DB);
   return 0;
 }
