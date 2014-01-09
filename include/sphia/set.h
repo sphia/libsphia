@@ -14,6 +14,12 @@ extern "C" {
 #include "common.h"
 #include "sphia.h"
 
+/**
+ * Set `key=value` in the given `sphia` instance.
+ *
+ * Returns 0 on success, -1 on failure.
+ */
+
 SPHIA_EXTERN int
 sphia_set (sphia_t *, const char *, const char *);
 

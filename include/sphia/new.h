@@ -14,6 +14,12 @@ extern "C" {
 #include "common.h"
 #include "sphia.h"
 
+/**
+ * Create/open a Sophia database at `path`.
+ *
+ * Returns NULL on failure.
+ */
+
 SPHIA_EXTERN sphia_t *
 sphia_new(const char *);
 

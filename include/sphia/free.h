@@ -14,6 +14,10 @@ extern "C" {
 #include "common.h"
 #include "sphia.h"
 
+/**
+ * Free memory from the given `sphia` instance.
+ */
+
 SPHIA_EXTERN void
 sphia_free(sphia_t *);
 
