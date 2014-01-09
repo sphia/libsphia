@@ -14,6 +14,14 @@ extern "C" {
 #include "common.h"
 #include "sphia.h"
 
+/**
+ * Get the value of `key` in the given `sphia`
+ * instance.  The returned value will always
+ * be NUL terminated.
+ *
+ * Returns NULL on error.
+ */
+
 SPHIA_EXTERN char *
 sphia_get (sphia_t *, const char *);
 
