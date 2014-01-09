@@ -23,6 +23,7 @@ extern "C" {
 #include "sphia/set.h"
 #include "sphia/rm.h"
 #include "sphia/clear.h"
+#include "sphia/count.h"
 
 #ifdef __cplusplus
 }

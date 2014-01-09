@@ -65,4 +65,7 @@ TEST(rm);
 // clear
 TEST(clear);
 
+// count
+TEST(count);
+
 #endif
