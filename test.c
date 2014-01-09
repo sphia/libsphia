@@ -25,6 +25,9 @@ main (void) {
   // set
   RUN(set);
 
+  // rm
+  RUN(rm);
+
   printf("\n-------------------------\n");
   printf("  libsphia test results");
   printf("\n-------------------------");
