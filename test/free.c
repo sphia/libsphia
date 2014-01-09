@@ -31,7 +31,7 @@ TEST(free_empty) {
 
 // free actual db pointers
 TEST(free_new_db) {
-  sphia_t *sphia = sphia_new("./test-db");
+  sphia_t *sphia = sphia_new(SPHIA_TEST_DB);
   assert(sphia);
   sphia_free(sphia);
   return 0;

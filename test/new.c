@@ -23,7 +23,7 @@ TEST(new) {
 }
 // create a new db
 TEST(new_db_create) {
-  sphia_t *sphia = sphia_new("./test-db");
+  sphia_t *sphia = sphia_new(SPHIA_TEST_DB);
   assert(sphia);
   sphia_free(sphia);
   return 0;
@@ -31,7 +31,7 @@ TEST(new_db_create) {
 
 // open an existing db
 TEST(new_db_existing) {
-  sphia_t *sphia = sphia_new("./test-db");
+  sphia_t *sphia = sphia_new(SPHIA_TEST_DB);
   assert(sphia);
   sphia_free(sphia);
   return 0;
