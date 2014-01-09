@@ -1,11 +1,9 @@
-
 PREFIX ?= /usr/local
 DESTDIR ?= sphia
 
 OS = $(shell uname)
-CC ?= gcc
+CC ?= cc
 AR = ar
-LD = ld
 LN = ln
 RM = rm
 VALGRIND ?= valgrind
@@ -24,16 +22,16 @@ TARGET_DSOLIB = $(TARGET_NAME).so.$(VERSION_MAJOR).$(VERSION_MINOR)
 TARGET_DYLIB = $(TARGET_NAME).$(VERSION_MAJOR).$(VERSION_MINOR).dylib
 TARGET_DSO = $(TARGET_NAME).so
 
-CFLAGS ?= -Iinclude -Ideps \
+CFLAGS += -Iinclude -Ideps \
 					-std=c99 -Wall -O2 \
 					-fvisibility=hidden \
 					-fPIC -pedantic
 
-LDFLAGS ?= -shared \
+LDFLAGS += -shared \
 					 -soname $(TARGET_DSO).$(VERSION_MAJOR) \
 					 -lsophia \
 					 -lpthread
-OSX_LDFLAGS ?= -lc \
+OSX_LDFLAGS += -lc \
 							-Wl,-install_name,$(TARGET_DSO), \
 							-o $(TARGET_DSOLIB) \
 							-lsophia \
@@ -55,7 +53,7 @@ ifdef DEBUG
 	CFLAGS += -DSPHIA_DEBUG
 endif
 
-all: clean $(DEPS) $(TARGET_STATIC) $(TARGET_DSO)
+all: $(DEPS) $(TARGET_STATIC) $(TARGET_DSO)
 
 $(TARGET_STATIC): $(OBJS)
 	$(AR) crus $(TARGET_STATIC) $(OBJS)
@@ -66,7 +64,7 @@ ifeq ("Darwin","$(OS)")
 	$(LN) -s $(TARGET_DSOLIB) $(TARGET_DSO)
 	$(LN) -s $(TARGET_DSOLIB) $(TARGET_DSO).$(VERSION_MAJOR)
 else
-	$(LD) $(OBJS) $(LDFLAGS) -o $(TARGET_DSOLIB)
+	$(CC) -shared $(OBJS) -o $(TARGET_DSOLIB)
 	$(LN) -s $(TARGET_DSOLIB) $(TARGET_DSO)
 	$(LN) -s $(TARGET_DSOLIB) $(TARGET_DSO).$(VERSION_MAJOR)
 	$(STRIP) --strip-unneeded $(TARGET_DSO)
@@ -84,12 +82,20 @@ $(DEPS):
 check: test
 	$(VALGRIND) --leak-check=full ./$(TEST_MAIN)
 
-test: $(TEST_OBJS)
+test: $(TEST_OBJS) all
 	$(CC) $(TEST_OBJS) test.c \
 		$(STATIC_DEPS) ./$(TARGET_STATIC) \
 		$(CFLAGS) -o $(TEST_MAIN) \
 		-lsophia -lpthread
 	./$(TEST_MAIN)
+
+travis:
+	rm -rf sophia
+	git clone --depth=1 https://github.com/larzconwell/sophia.git sophia
+	$(MAKE) -C sophia/db
+	mv sophia/db sophia/sophia
+	rm -f sophia/sophia/*.so*
+	CFLAGS="-Isophia/" LIBRARY_PATH="./sophia/sophia" $(MAKE) test
 
 clean:
 	$(foreach dep,$(DEPS),$(shell make clean -C deps/$(dep)))
@@ -101,9 +107,9 @@ clean:
 	$(RM) -f $(TARGET_DSO).$(VERSION_MAJOR)
 	$(RM) -f $(TARGET_DSO)
 	$(RM) -f $(TARGET_DYLIB)
-	$(RM) -fr test-db
+	$(RM) -fr test-db sophia
 
-install:
+install: all
 	test -d $(PREFIX)/$(DESTDIR) || mkdir $(PREFIX)/$(DESTDIR)
 	install $(LIB_NAME).h $(PREFIX)/include
 	cp include/$(LIB_NAME)/*.h $(PREFIX)/include/$(DESTDIR)
