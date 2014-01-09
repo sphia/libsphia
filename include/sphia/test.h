@@ -56,4 +56,7 @@ TEST(set);
 // rm
 TEST(rm);
 
+// clear
+TEST(clear);
+
 #endif
