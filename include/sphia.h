@@ -21,6 +21,7 @@ extern "C" {
 #include "sphia/free.h"
 #include "sphia/get.h"
 #include "sphia/set.h"
+#include "sphia/rm.h"
 
 #ifdef __cplusplus
 }
