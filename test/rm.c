@@ -24,7 +24,7 @@ TEST(rm) {
 }
 
 TEST(simple_rm) {
-  sphia_t *sphia = sphia_new("./test-db");
+  sphia_t *sphia = sphia_new(SPHIA_TEST_DB);
   assert(sphia);
 
   assert(0 == sphia_set(sphia, "key", "value"));
@@ -36,7 +36,7 @@ TEST(simple_rm) {
 }
 
 TEST(similar_keys_rm) {
-  sphia_t *sphia = sphia_new("./test-db");
+  sphia_t *sphia = sphia_new(SPHIA_TEST_DB);
   assert(sphia);
 
   char *keys[] = {

@@ -22,7 +22,7 @@ TEST(clear) {
 }
 
 TEST(simple_clear) {
-  sphia_t *sphia = sphia_new("./test-db");
+  sphia_t *sphia = sphia_new(SPHIA_TEST_DB);
   assert(sphia);
 
   for (int i = 0; i < 20; i++) {

@@ -29,7 +29,7 @@ TEST(count_bad_instance) {
 }
 
 TEST(simple_count) {
-  sphia_t *sphia = sphia_new("./test-db");
+  sphia_t *sphia = sphia_new(SPHIA_TEST_DB);
   assert(sphia);
 
   // clear, just in case
