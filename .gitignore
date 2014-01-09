@@ -18,5 +18,6 @@
 *.app
 
 *-test
+sophia
 test-db/
 sphia-test-db/
