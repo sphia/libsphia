@@ -19,7 +19,6 @@ sphia_get (sphia_t *self, const char *key) {
   void *value = NULL;
   int rc = 0;
 
-  spe *e = self->env;
   rc = sp_get(self->db, key, size, &value, &vsize);
 
   switch (rc) {

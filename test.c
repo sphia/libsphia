@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <assert.h>
-#include "test/tests.h"
+#include <sphia/test.h>
 
 int
 main (void) {
@@ -21,6 +21,9 @@ main (void) {
 
   // get
   RUN(get);
+
+  // set
+  RUN(set);
 
   printf("\n-------------------------\n");
   printf("  libsphia test results");

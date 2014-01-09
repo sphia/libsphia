@@ -1,6 +1,6 @@
 
 /**
- * `test/tests.h' - libsphia
+ * `test.h' - libsphia
  *
  * Copyright (C) 2014 The libsphia Authors <sphia@googlegroups.com>
  */
@@ -49,5 +49,8 @@ TEST(free);
 
 // get
 TEST(get);
+
+// set
+TEST(set);
 
 #endif

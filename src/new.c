@@ -21,7 +21,6 @@ sphia_t *
 sphia_new(const char *path) {
   int rc = 0;
   spenv *env = NULL;
-  spe *e = NULL;
   sp *db = NULL;
 
   sphia_t *sphia = (sphia_t *) malloc(sizeof(sphia_t));

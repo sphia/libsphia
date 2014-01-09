@@ -1,6 +1,6 @@
 
 /**
- * `test/get.c' - libsphia
+ * `test/set.c' - libsphia
  *
  * Copyright (C) 2014 The libsphia Authors <sphia@googlegroups.com>
  */
@@ -12,26 +12,26 @@
 #include <sphia/set.h>
 #include <sphia/test.h>
 
-TEST(simple_get);
+TEST(simple_set);
 
-TEST(get) {
-  HEADER(sphia_get);
-  RUN(simple_get);
+TEST(set) {
+  HEADER(sphia_set);
+  RUN(simple_set);
   FOOTER();
 }
 
-TEST(simple_get) {
+TEST(simple_set) {
   sphia_t *sphia = sphia_new("./test-db");
   assert(sphia);
 
   char key[] = "key";
   char value[] = "value";
-  char *actual = NULL;
+  int rc = 0;
 
-  assert(0 == sphia_set(sphia, key, value));
-  actual = sphia_get(sphia, key);
-  assert(actual);
-  assert(0 == strncmp(actual, value, strlen(actual)));
+  rc = sphia_set(sphia, key, value);
+
+  assert(0 == rc);
+
   sphia_free(sphia);
   return 0;
 }

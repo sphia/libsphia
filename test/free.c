@@ -1,6 +1,14 @@
 
-#include "tests.h"
-#include "sphia.h"
+/**
+ * `test/free.c' - libsphia
+ *
+ * Copyright (C) 2014 The libsphia Authors <sphia@googlegroups.com>
+ */
+
+#include <sphia/sphia.h>
+#include <sphia/new.h>
+#include <sphia/free.h>
+#include <sphia/test.h>
 
 TEST(free_empty);
 TEST(free_new_db);

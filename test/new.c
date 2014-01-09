@@ -1,6 +1,14 @@
 
-#include "tests.h"
-#include "sphia.h"
+/**
+ * `test/new.c' - libsphia
+ *
+ * Copyright (C) 2014 The libsphia Authors <sphia@googlegroups.com>
+ */
+
+#include <sphia/sphia.h>
+#include <sphia/new.h>
+#include <sphia/free.h>
+#include <sphia/test.h>
 
 TEST(new_db_create);
 TEST(new_db_existing);

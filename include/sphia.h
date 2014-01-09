@@ -20,6 +20,7 @@ extern "C" {
 #include "sphia/new.h"
 #include "sphia/free.h"
 #include "sphia/get.h"
+#include "sphia/set.h"
 
 #ifdef __cplusplus
 }
