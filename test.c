@@ -28,6 +28,9 @@ main (void) {
   // rm
   RUN(rm);
 
+  // clear
+  RUN(clear);
+
   printf("\n-------------------------\n");
   printf("  libsphia test results");
   printf("\n-------------------------");

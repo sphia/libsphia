@@ -22,6 +22,7 @@ extern "C" {
 #include "sphia/get.h"
 #include "sphia/set.h"
 #include "sphia/rm.h"
+#include "sphia/clear.h"
 
 #ifdef __cplusplus
 }

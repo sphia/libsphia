@@ -11,6 +11,19 @@
 extern "C" {
 #endif
 
+#include "common.h"
+#include "sphia.h"
+
+/**
+ * Remove all keys from the given `sphia` instance.
+ *
+ * Returns 0 on success, -1 on failure.
+ */
+
+SPHIA_EXTERN int
+sphia_clear (sphia_t *);
+
+
 #ifdef __cplusplus
 }
 #endif
