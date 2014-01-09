@@ -14,6 +14,7 @@
 #include <sphia/test.h>
 
 TEST(simple_rm);
+TEST(similar_keys_rm);
 
 TEST(rm) {
   HEADER(sphia_rm);

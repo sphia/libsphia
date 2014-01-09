@@ -53,4 +53,7 @@ TEST(get);
 // set
 TEST(set);
 
+// rm
+TEST(rm);
+
 #endif
