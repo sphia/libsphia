@@ -22,17 +22,17 @@ TARGET_DSOLIB = $(TARGET_NAME).so.$(VERSION_MAJOR).$(VERSION_MINOR)
 TARGET_DYLIB = $(TARGET_NAME).$(VERSION_MAJOR).$(VERSION_MINOR).dylib
 TARGET_DSO = $(TARGET_NAME).so
 
-CFLAGS ?= -Iinclude -Ideps    \
+CFLAGS += -Iinclude -Ideps    \
 					-std=c99 -Wall -O2  \
 					-fvisibility=hidden \
 					-fPIC -pedantic
 
-LDFLAGS ?= -shared   \
+LDFLAGS += -shared   \
 					 -lsophia  \
 					 -lpthread \
 					 -soname $(TARGET_DSO).$(VERSION_MAJOR)
 
-OSX_LDFLAGS ?= -lc \
+OSX_LDFLAGS += -lc \
 							 -Wl,-install_name,$(TARGET_DSO) \
 							 -o $(TARGET_DSOLIB) \
 							 -lsophia \
