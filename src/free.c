@@ -1,6 +1,14 @@
 
+/**
+ * `free.c' - libsphia
+ *
+ * Copyright (C) 2014 The libsphia Authors <sphia@googlegroups.com>
+ */
+
 #include <stdlib.h>
-#include "sphia.h"
+#include <sophia/sophia.h>
+#include <sphia/common.h>
+#include <sphia/free.h>
 
 /**
  * Free the sphia structure.

@@ -11,7 +11,9 @@
 extern "C" {
 #endif
 
-void
+#include "common.h"
+
+SPHIA_EXTERN void
 sphia_free(sphia_t *);
 
 #ifdef __cplusplus
