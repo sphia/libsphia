@@ -57,6 +57,11 @@ TEST(set_similar) {
     {"kkey", "j"},
     {"keey", "k"},
     {"keyy", "l"},
+    {"ke0", "m"},
+    {"key0", "n"},
+    {"key00", "o"},
+    {"key000", "p"},
+    {"key0000-", "q"},
     {NULL, NULL}
   };
 
