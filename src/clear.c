@@ -25,7 +25,7 @@ sphia_clear (sphia_t *self) {
   int count = 0;
 
   while (sp_fetch(c)) {
-    const char *key = sp_key(c);
+    char *key = (char *) sp_key(c);
     if (key) {
       count++;
       keys[count] = key;
@@ -37,7 +37,7 @@ sphia_clear (sphia_t *self) {
   if (0 == count) return 0;
 
   for (int i = 1; i <= count; i++) {
-    const char *key = keys[i];
+    char *key = keys[i];
     if (-1 == sphia_rm(self, key)) return -1;
   }
 
