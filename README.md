@@ -37,3 +37,9 @@
   Set `key=value` in the given `sphia` instance.
 
   Returns 0 on success, -1 on failure.
+
+### int sphia_purge(sphia_t *sphia)
+
+  Purge the given `sphia` instance of corrupt and incomplete data.
+
+  Return 0 on success, -1 on error.

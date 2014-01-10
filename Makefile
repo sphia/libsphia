@@ -1,3 +1,4 @@
+
 PREFIX ?= /usr/local
 DESTDIR ?= sphia
 
@@ -13,8 +14,8 @@ LIB_NAME = sphia
 VERSION_MAJOR = 0
 VERSION_MINOR = 1
 
-DEPS = $(test -d deps && shell ls deps/)
-STATIC_DEPS = $(wildcard deps/*/*.a)
+DEPS = $(shell test -d deps/ && ls deps/)
+DEP_OBJS = $(wildcard deps/*/*.o)
 
 TARGET_NAME = lib$(LIB_NAME)
 TARGET_STATIC = $(TARGET_NAME).a
@@ -39,8 +40,8 @@ OSX_LDFLAGS += -lc \
 							 -lpthread
 
 SRC = $(wildcard src/*.c)
-SRC += $(STATIC_DEPS)
 OBJS = $(SRC:.c=.o)
+OBJS += $(DEP_OBJS)
 
 TEST_SRC = $(filter-out test/test.c, $(wildcard test/*.c))
 TEST_OBJS = $(TEST_SRC:.c=.o)
@@ -55,7 +56,7 @@ ifdef DEBUG
 	CFLAGS += -DSPHIA_DEBUG
 endif
 
-all: $(DEPS) $(TARGET_STATIC) $(TARGET_DSO)
+all: deps $(TARGET_STATIC) $(TARGET_DSO)
 
 $(TARGET_STATIC): $(OBJS)
 	$(AR) crus $(TARGET_STATIC) $(OBJS)
@@ -78,8 +79,10 @@ src/.c.o:
 test/.c.o:
 	$(CC) $(CFLAGS) -c $<
 
+deps: $(DEPS)
+
 $(DEPS):
-	make -C deps/$@
+	$(MAKE) -C deps/$@
 
 check: test
 	$(VALGRIND) --leak-check=full ./$(TEST_MAIN)
@@ -87,7 +90,7 @@ check: test
 test: CFLAGS += -DSPHIA_TEST_DB='"$(TEST_DB_PATH)"'
 test: $(TEST_OBJS) all
 	$(CC) $(TEST_OBJS) test.c \
-		$(STATIC_DEPS) ./$(TARGET_STATIC) \
+		./$(TARGET_STATIC) \
 		$(CFLAGS) -o $(TEST_MAIN) \
 		-lsophia -lpthread
 	./$(TEST_MAIN)
@@ -98,6 +101,7 @@ travis:
 	$(MAKE) -C sophia/db
 	mv sophia/db sophia/sophia
 	rm -f sophia/sophia/*.so*
+	CFLAGS="-Isophia/" LIBRARY_PATH="./sophia/sophia" $(MAKE) deps
 	CFLAGS="-Isophia/" LIBRARY_PATH="./sophia/sophia" $(MAKE) test
 
 clean:
@@ -124,4 +128,4 @@ uninstall:
 	rm -f $(PREFIX)/lib/$(TARGET_STATIC)
 	rm -f $(PREFIX)/lib/$(TARGET_DSO)
 
-.PHONY: test
+.PHONY: test deps

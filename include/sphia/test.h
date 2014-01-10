@@ -62,4 +62,7 @@ TEST(clear);
 // count
 TEST(count);
 
+// purge
+TEST(purge);
+
 #endif
