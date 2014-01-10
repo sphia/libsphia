@@ -45,6 +45,7 @@ OBJS = $(SRC:.c=.o)
 TEST_SRC = $(filter-out test/test.c, $(wildcard test/*.c))
 TEST_OBJS = $(TEST_SRC:.c=.o)
 TEST_MAIN = sphia-test
+TEST_DB_PATH ?= /tmp/sphia-test-db
 
 ifneq ("Darwin","$(OS)")
 	CFLAGS += -lm
@@ -83,6 +84,7 @@ $(DEPS):
 check: test
 	$(VALGRIND) --leak-check=full ./$(TEST_MAIN)
 
+test: CFLAGS += -DSPHIA_TEST_DB='"$(TEST_DB_PATH)"'
 test: $(TEST_OBJS) all
 	$(CC) $(TEST_OBJS) test.c \
 		$(STATIC_DEPS) ./$(TARGET_STATIC) \
@@ -108,7 +110,7 @@ clean:
 	$(RM) -f $(TARGET_DSO).$(VERSION_MAJOR)
 	$(RM) -f $(TARGET_DSO)
 	$(RM) -f $(TARGET_DYLIB)
-	$(RM) -fr test-db sophia
+	$(RM) -fr test-db sophia $(TEST_DB_PATH)
 
 install: all
 	test -d $(PREFIX)/$(DESTDIR) || mkdir $(PREFIX)/$(DESTDIR)
