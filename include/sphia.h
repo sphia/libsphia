@@ -11,8 +11,6 @@
 extern "C" {
 #endif
 
-
-
 #include <sophia/sophia.h>
 #include <sophia/sp.h>
 
