@@ -24,17 +24,16 @@ sphia_get (sphia_t *self, const char *key) {
 
   switch (rc) {
     // unknown error
-    case -1: break;
-
+    case -1:
     // not found
-    case 0: break;
+    case 0:
+      break;
 
     // found
     case 1:
       value = (char *) ref;
       if ('\0' != value[vsize]) value[vsize] = '\0';
       return value;
-      break;
   }
 
   return NULL;

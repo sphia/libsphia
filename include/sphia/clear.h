@@ -23,7 +23,6 @@ extern "C" {
 SPHIA_EXTERN int
 sphia_clear (sphia_t *);
 
-
 #ifdef __cplusplus
 }
 #endif
