@@ -5,6 +5,9 @@
  * Copyright (C) 2014 The libsphia Authors <sphia@googlegroups.com>
  */
 
+#include <stdlib.h>
+#include <stdio.h>
+#include <sys/stat.h>
 #include <sphia/sphia.h>
 #include <sphia/new.h>
 #include <sphia/free.h>
@@ -22,18 +25,6 @@ temp_file(const char *filename) {
   return tmp;
 }
 
-static void
-create_file(const char *name) {
-  char *path = temp_file(name);
-  assert(path);
-
-  FILE *fp = fopen(path, "w");
-  assert(fp);
-  fclose(fp);
-
-  free(path);
-}
-
 static int
 file_exists(const char *name) {
   struct stat stats;
@@ -46,6 +37,20 @@ file_exists(const char *name) {
   return -1 == rc
     ? 0
     : 1;
+}
+
+static void
+create_file(const char *name) {
+  char *path = temp_file(name);
+  assert(path);
+
+  if (0 == file_exists(name)) {
+    FILE *fp = fopen(path, "w");
+    assert(fp);
+    fclose(fp);
+  }
+
+  free(path);
 }
 
 TEST(purge) {
@@ -74,7 +79,7 @@ TEST(purge_simple) {
       ".foo"
     , ".bar"
     , "1.log"
-    , "thing.log"
+    , "foo.log"
     , NULL
   };
 

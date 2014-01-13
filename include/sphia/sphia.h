@@ -11,7 +11,7 @@
 extern "C" {
 #endif
 
-#include <sophia/sp.h>
+#include <sophia/sophia.h>
 
 /**
  * sphia object that manages core sophia environment
@@ -39,12 +39,6 @@ typedef struct sphia_s {
    */
 
   void *env;
-
-  /**
-   * sophia error object for last known error
-   */
-
-  spe *error;
 
 } sphia_t;
 

@@ -5,10 +5,10 @@
  * Copyright (C) 2014 The libsphia Authors <sphia@googlegroups.com>
  */
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <dirent.h>
-#include <sophia/sp.h>
 #include <sophia/sophia.h>
 #include <sphia/common.h>
 #include <sphia/purge.h>

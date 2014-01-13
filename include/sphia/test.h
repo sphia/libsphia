@@ -65,4 +65,7 @@ TEST(count);
 // purge
 TEST(purge);
 
+// error
+TEST(error);
+
 #endif
