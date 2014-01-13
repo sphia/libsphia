@@ -18,7 +18,7 @@
  */
 
 sphia_t *
-sphia_new(const char *path) {
+sphia_new (const char *path) {
   int rc = 0;
   spenv *env = NULL;
   sp *db = NULL;
