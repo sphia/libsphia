@@ -43,5 +43,6 @@ sphia_purge (sphia_t *self) {
     free(path);
   }
 
+  closedir(dir);
   return 0;
 }
