@@ -43,11 +43,9 @@ file_exists(const char *name) {
 
   int rc = stat(path, &stats);
   free(path);
-  if (-1 == rc && ENOENT == errno) {
-    return 0;
-  }
-
-  return 1;
+  return -1 == rc
+    ? 0
+    : 1;
 }
 
 TEST(purge) {
