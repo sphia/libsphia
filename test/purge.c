@@ -36,17 +36,12 @@ create_file(const char *name) {
 
 static int
 file_exists(const char *name) {
-  struct stat *stats = malloc(sizeof(struct stat));
-  int rc = 0;
-  if (NULL == stats) {
-    return -1;
-  }
+  struct stat stats;
 
   char *path = temp_file(name);
   assert(path);
 
-  rc = stat(path, stats);
-  free(stats);
+  int rc = stat(path, &stats);
   free(path);
   if (-1 == rc && ENOENT == errno) {
     return 0;
