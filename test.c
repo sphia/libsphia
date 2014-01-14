@@ -1,4 +1,3 @@
-
 /**
  * `test.c' - libidna
  *
@@ -13,35 +12,23 @@
 int
 main (void) {
 
-  // new
+  /**
+   * Tests to run
+   **/
+   
   RUN(new);
-
-  // free
   RUN(free);
-
-  // get
   RUN(get);
-
-  // set
   RUN(set);
-
-  // rm
   RUN(rm);
-
-  // clear
   RUN(clear);
-
-  // count
   RUN(count);
-
-  // purge
   RUN(purge);
-
-  // error
   RUN(error);
 
   printf("\n-------------------------\n");
   printf("  libsphia test results");
   printf("\n-------------------------");
+  
   FOOTER();
 }
