@@ -1,18 +1,56 @@
 {
+  "variables": {
+    "library%": "static_library"
+  },
+  "target_defaults": {
+    "default_configuration": "Release",
+    "configurations": {
+      "Debug": {
+        "defines": ["DEBUG"]
+      },
+      "Release": {
+        "defines": ["NDEBUG"]
+      }
+    },
+    "cflags": [
+      "-std=c99",
+      "-Wall",
+      "-Wextra",
+      "-fvisibility=hidden",
+      "-g",
+      "-O2",
+    ],
+    "target_conditions": [
+      ["_type=='shared_library'", {
+        "cflags": ["-fPIC"]
+      }]
+    ],
+    "link_settings": {
+      "libraries": ["-lsophia", "-lpthread"]
+    },
+    "include_dirs": [
+      "deps",
+      "include"
+    ],
+    "direct_dependent_settings": {
+      "cflags": [
+        "-std=c99",
+        "-Wall",
+        "-Wextra",
+        "-fvisibility=hidden",
+        "-g",
+        "-O2",
+        "-fPIC"
+      ],
+    }
+  },
   "targets": [
     {
       "target_name": "sphia",
       "product_prefix": "lib",
-      "type": "static_library",
-      "link_settings": {
-        "libraries": [ "-lsophia" ]
-      },
+      "type": "<(library)",
       "dependencies": [
         "deps/str-ends-with/str-ends-with.gyp:str-ends-with"
-      ],
-      "include_dirs": [
-        "deps",
-        "include"
       ],
       "sources": [
         "src/clear.c",
@@ -30,7 +68,6 @@
       "target_name": "sphia-test",
       "type": "executable",
       "dependencies": [ "sphia" ],
-      "include_dirs": [ "deps", "include" ],
       "sources": [
         "test/clear.c",
         "test/count.c",
@@ -43,10 +80,11 @@
         "test/set.c",
         "test.c"
       ],
-      "linkflags": [ "-lsophia" ],
       "defines": [
-        'SPHIA_TEST_DB="/tmp/libsphia-test-db"'
-      ]
+        "DEBUG",
+        # TODO: Once Windows support is added, change this.
+        "SPHIA_TEST_DB='/tmp/libsphia-test-db'"
+      ],
     }
   ]
 }
