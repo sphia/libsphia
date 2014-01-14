@@ -1,4 +1,3 @@
-
 /**
  * `new.h' - libsphia
  *
@@ -21,7 +20,7 @@ extern "C" {
  */
 
 SPHIA_EXTERN sphia_t *
-sphia_new(const char *);
+sphia_new (const char *);
 
 #ifdef __cplusplus
 }
