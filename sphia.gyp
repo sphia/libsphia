@@ -22,10 +22,8 @@
         "src/init.c",
         "src/new.c",
         "src/purge.c",
-        "src/reset.c",
         "src/rm.c",
-        "src/set.c",
-        "src/status.c"
+        "src/set.c"
       ]
     },
     {
