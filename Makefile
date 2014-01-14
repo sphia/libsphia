@@ -107,8 +107,7 @@ travis:
 	rm -rf sophia
 	git clone --depth=1 https://github.com/pmwkaa/sophia.git sophia
 	$(MAKE) -C sophia/db
-	mv sophia/db sophia/sophia
-	rm -f sophia/sophia/*.so*
+	rm -f sophia/db/*.so*
 	CFLAGS="-Isophia/" LIBRARY_PATH="./sophia/db" $(MAKE) deps
 	CFLAGS="-Isophia/" LIBRARY_PATH="./sophia/db" $(MAKE) all test
 
