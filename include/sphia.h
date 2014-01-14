@@ -12,7 +12,6 @@ extern "C" {
 #endif
 
 #include <sophia/sophia.h>
-#include <sophia/sp.h>
 
 // api
 #include "sphia/new.h"
@@ -22,6 +21,7 @@ extern "C" {
 #include "sphia/rm.h"
 #include "sphia/clear.h"
 #include "sphia/count.h"
+#include "sphia/error.h"
 
 #ifdef __cplusplus
 }

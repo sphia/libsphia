@@ -37,6 +37,9 @@ main (void) {
   // purge
   RUN(purge);
 
+  // error
+  RUN(error);
+
   printf("\n-------------------------\n");
   printf("  libsphia test results");
   printf("\n-------------------------");

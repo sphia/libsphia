@@ -10,6 +10,7 @@
 #include <sphia/free.h>
 #include <sphia/set.h>
 #include <sphia/get.h>
+#include <sphia/count.h>
 #include <sphia/clear.h>
 #include <sphia/test.h>
 
