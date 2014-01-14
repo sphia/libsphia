@@ -17,9 +17,9 @@
       "sources": [
         "src/clear.c",
         "src/count.c",
+        "src/error.c",
         "src/free.c",
         "src/get.c",
-        "src/init.c",
         "src/new.c",
         "src/purge.c",
         "src/rm.c",
@@ -34,6 +34,7 @@
       "sources": [
         "test/clear.c",
         "test/count.c",
+        "test/error.c",
         "test/free.c",
         "test/get.c",
         "test/new.c",
