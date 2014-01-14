@@ -5,6 +5,7 @@
  * Copyright (C) 2014 The libsphia Authors <sphia@googlegroups.com>
  */
 
+#include <stdlib.h>
 #include <sphia/sphia.h>
 #include <sphia/new.h>
 #include <sphia/free.h>
