@@ -59,13 +59,13 @@ endif
 all: deps $(TARGET_STATIC) $(TARGET_DSO)
 
 $(TARGET_STATIC): $(OBJS)
-	@echo "  CC (static) $(TARGET_STATIC)"
+	@echo "  LIBTOOL-STATIC $(TARGET_STATIC)"
 	@$(AR) crus $(TARGET_STATIC) $(OBJS)
 
 $(TARGET_DSO): $(OBJS)
-	@echo "  CC (shared) $(TARGET_DSOLIB)"
-	@echo "  CC (shared) $(TARGET_DSO)"
-	@echo "  CC (shared) $(TARGET_DSO).$(VERSION_MAJOR)"
+	@echo "  LIBTOOL-SHARED $(TARGET_DSOLIB)"
+	@echo "  LIBTOOL-SHARED $(TARGET_DSO)"
+	@echo "  LIBTOOL-SHARED $(TARGET_DSO).$(VERSION_MAJOR)"
 ifeq ("Darwin","$(OS)")
 	@$(CC) -shared $(OBJS) $(OSX_LDFLAGS) -o $(TARGET_DSOLIB)
 	@$(LN) -s $(TARGET_DSOLIB) $(TARGET_DSO)
@@ -78,17 +78,17 @@ else
 endif
 
 $(OBJS):
-	@echo "  CC $@ $(@:.o=.c)"
+	@echo "  CC(target) $@"
 	@$(CC) $(CFLAGS) -c -o $@ $(@:.o=.c)
 
 $(TEST_OBJS):
-	@echo "  CC (test) $@ $(@:.o=.c)"
+	@echo "  CC(target) $@"
 	@$(CC) $(CFLAGS) -c -o $@ $(@:.o=.c)
 
 deps: $(DEPS)
 
 $(DEPS):
-	@echo "  MAKE deps/$@"
+	@echo "  MAKE(target) deps/$@"
 	@$(MAKE) -C deps/$@ >/dev/null 2>&1
 
 check: test
@@ -96,7 +96,7 @@ check: test
 
 test: CFLAGS += -DSPHIA_TEST_DB='"$(TEST_DB_PATH)"'
 test: $(TEST_OBJS)
-	@echo "  CC ($(TEST_MAIN))"
+	@echo "  LINK(target) ($(TEST_MAIN))"
 	@$(CC) $(TEST_OBJS) test.c \
 		./$(TARGET_STATIC) \
 		$(CFLAGS) -o $(TEST_MAIN) \
@@ -113,17 +113,19 @@ travis:
 	CFLAGS="-Isophia/" LIBRARY_PATH="./sophia/sophia" $(MAKE) all test
 
 clean:
-	$(foreach dep,$(DEPS),$(shell make clean -C deps/$(dep)))
-	$(RM) -f $(TEST_MAIN)
-	$(RM) -f $(OBJS)
-	$(RM) -f $(TEST_OBJS)
-	$(RM) -f $(TARGET_STATIC)
-	$(RM) -f $(TARGET_DSOLIB)
-	$(RM) -f $(TARGET_DSO).$(VERSION_MAJOR)
-	$(RM) -f $(TARGET_DSO)
-	$(RM) -f $(TARGET_DYLIB)
-	$(RM) -fr test-db sophia $(TEST_DB_PATH)
-	$(RM) -fr output
+	@for dep in $(DEPS); do \
+		echo "  MAKE(clean) deps/$$dep"; \
+		$(MAKE) clean -C deps/$$dep >/dev/null 2>&1; \
+	done
+	@for item in \
+		$(TEST_MAIN) $(OBJS) $(TEST_OBJS) $(TARGET_STATIC) \
+		$(TARGET_DSOLIB) $(TARGET_DSO).$(VERSION_MAJOR) \
+		$(TARGET_DSO) $(TARGET_DYLIB) $(TEST_DB_PATH) \
+		test-db sophia output; do \
+		echo "  RM $$item"; \
+		$(RM) -rf $$item; \
+	done;
+
 
 install: all
 	test -d $(PREFIX)/$(DESTDIR) || mkdir $(PREFIX)/$(DESTDIR)
