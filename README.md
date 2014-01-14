@@ -1,9 +1,10 @@
+
 libsphia
 =====
 
 Higher level API for working with SophiaDB
 
-[![Build Status](https://travis-ci.org/sphia/libsphia.png)](https://travis-ci.org/sphia/libsphia)
+[![Build Status](https://travis-ci.org/sphia/libsphia.png?branch=master)](https://travis-ci.org/sphia/libsphia)
 
 ## Status
 
