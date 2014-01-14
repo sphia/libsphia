@@ -6,7 +6,7 @@
  */
 
 #include <stdlib.h>
-#include <sophia/sophia.h>
+#include <sophia.h>
 #include <sphia/sphia.h>
 #include <sphia/free.h>
 
