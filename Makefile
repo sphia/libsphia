@@ -59,41 +59,49 @@ endif
 all: deps $(TARGET_STATIC) $(TARGET_DSO)
 
 $(TARGET_STATIC): $(OBJS)
-	$(AR) crus $(TARGET_STATIC) $(OBJS)
+	@echo "  CC (static) $(TARGET_STATIC)"
+	@$(AR) crus $(TARGET_STATIC) $(OBJS)
 
 $(TARGET_DSO): $(OBJS)
+	@echo "  CC (shared) $(TARGET_DSOLIB)"
+	@echo "  CC (shared) $(TARGET_DSO)"
+	@echo "  CC (shared) $(TARGET_DSO).$(VERSION_MAJOR)"
 ifeq ("Darwin","$(OS)")
-	$(CC) -shared $(OBJS) $(OSX_LDFLAGS) -o $(TARGET_DSOLIB)
-	$(LN) -s $(TARGET_DSOLIB) $(TARGET_DSO)
-	$(LN) -s $(TARGET_DSOLIB) $(TARGET_DSO).$(VERSION_MAJOR)
+	@$(CC) -shared $(OBJS) $(OSX_LDFLAGS) -o $(TARGET_DSOLIB)
+	@$(LN) -s $(TARGET_DSOLIB) $(TARGET_DSO)
+	@$(LN) -s $(TARGET_DSOLIB) $(TARGET_DSO).$(VERSION_MAJOR)
 else
-	$(CC) -shared $(OBJS) -o $(TARGET_DSOLIB)
-	$(LN) -s $(TARGET_DSOLIB) $(TARGET_DSO)
-	$(LN) -s $(TARGET_DSOLIB) $(TARGET_DSO).$(VERSION_MAJOR)
-	$(STRIP) --strip-unneeded $(TARGET_DSO)
+	@$(CC) -shared $(OBJS) -o $(TARGET_DSOLIB)
+	@$(LN) -s $(TARGET_DSOLIB) $(TARGET_DSO)
+	@$(LN) -s $(TARGET_DSOLIB) $(TARGET_DSO).$(VERSION_MAJOR)
+	@$(STRIP) --strip-unneeded $(TARGET_DSO)
 endif
 
-src/.c.o:
-	$(CC) $(CFLAGS) -c $<
+$(OBJS):
+	@echo "  CC $@ $(@:.o=.c)"
+	@$(CC) $(CFLAGS) -c -o $@ $(@:.o=.c)
 
-test/.c.o:
-	$(CC) $(CFLAGS) -c $<
+$(TEST_OBJS):
+	@echo "  CC (test) $@ $(@:.o=.c)"
+	@$(CC) $(CFLAGS) -c -o $@ $(@:.o=.c)
 
 deps: $(DEPS)
 
 $(DEPS):
-	$(MAKE) -C deps/$@
+	@echo "  MAKE deps/$@"
+	@$(MAKE) -C deps/$@ >/dev/null 2>&1
 
 check: test
 	$(VALGRIND) --leak-check=full ./$(TEST_MAIN)
 
 test: CFLAGS += -DSPHIA_TEST_DB='"$(TEST_DB_PATH)"'
-test: $(TEST_OBJS) all
-	$(CC) $(TEST_OBJS) test.c \
+test: $(TEST_OBJS)
+	@echo "  CC ($(TEST_MAIN))"
+	@$(CC) $(TEST_OBJS) test.c \
 		./$(TARGET_STATIC) \
 		$(CFLAGS) -o $(TEST_MAIN) \
 		-lsophia -lpthread
-	./$(TEST_MAIN)
+	@./$(TEST_MAIN)
 
 travis:
 	rm -rf sophia
