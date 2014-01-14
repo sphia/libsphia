@@ -1,3 +1,4 @@
+
 PREFIX ?= /usr/local
 DESTDIR ?= sphia
 
@@ -122,6 +123,7 @@ clean:
 	$(RM) -f $(TARGET_DSO)
 	$(RM) -f $(TARGET_DYLIB)
 	$(RM) -fr test-db sophia $(TEST_DB_PATH)
+	$(RM) -fr output
 
 install: all
 	test -d $(PREFIX)/$(DESTDIR) || mkdir $(PREFIX)/$(DESTDIR)
