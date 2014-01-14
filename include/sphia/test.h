@@ -1,4 +1,3 @@
-
 /**
  * `test.h' - libsphia
  *
@@ -41,31 +40,15 @@ static int TESTS_FAILED = 0;
  * A list of all the test to run
  */
 
-// new
+
 TEST(new);
-
-// free
 TEST(free);
-
-// get
 TEST(get);
-
-// set
 TEST(set);
-
-// rm
 TEST(rm);
-
-// clear
 TEST(clear);
-
-// count
 TEST(count);
-
-// purge
 TEST(purge);
-
-// error
 TEST(error);
 
 #endif
