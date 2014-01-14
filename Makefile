@@ -108,8 +108,8 @@ travis:
 	git clone --depth=1 https://github.com/pmwkaa/sophia.git sophia
 	$(MAKE) -C sophia/db
 	rm -f sophia/db/*.so*
-	CFLAGS="-Isophia/" LIBRARY_PATH="./sophia/db" $(MAKE) deps
-	CFLAGS="-Isophia/" LIBRARY_PATH="./sophia/db" $(MAKE) all test
+	CFLAGS="-Isophia/db" LIBRARY_PATH="./sophia/db" $(MAKE) deps
+	CFLAGS="-Isophia/db" LIBRARY_PATH="./sophia/db" $(MAKE) all test
 
 clean:
 	@for dep in $(DEPS); do \
