@@ -105,7 +105,7 @@ test: $(TEST_OBJS)
 
 travis:
 	rm -rf sophia
-	git clone --depth=1 https://github.com/larzconwell/sophia.git sophia
+	git clone --depth=1 https://github.com/pmwkaa/sophia.git sophia
 	$(MAKE) -C sophia/db
 	mv sophia/db sophia/sophia
 	rm -f sophia/sophia/*.so*
