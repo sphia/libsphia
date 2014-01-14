@@ -1,4 +1,3 @@
-
 /**
  * `free.h' - libsphia
  *
@@ -19,7 +18,7 @@ extern "C" {
  */
 
 SPHIA_EXTERN void
-sphia_free(sphia_t *);
+sphia_free (sphia_t *);
 
 #ifdef __cplusplus
 }
