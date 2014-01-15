@@ -11,8 +11,6 @@
 extern "C" {
 #endif
 
-#include <sophia/sophia.h>
-
 // api
 #include "sphia/new.h"
 #include "sphia/free.h"

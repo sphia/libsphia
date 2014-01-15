@@ -10,8 +10,12 @@
 #include <stdio.h>
 #include <assert.h>
 
-static int TESTS_PASSED = 0;
-static int TESTS_FAILED = 0;
+static int TESTS_PASSED;
+static int TESTS_FAILED;
+
+#ifndef SPHIA_TEST_DB
+#define SPHIA_TEST_DB "/tmp/sphia-test-db"
+#endif
 
 #define HEADER(n) \
   printf("\nrunning '%s' test(s)\n", #n); \

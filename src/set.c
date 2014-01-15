@@ -7,7 +7,7 @@
 
 
 #include <string.h>
-#include <sophia/sophia.h>
+#include <sophia.h>
 #include <sphia/common.h>
 #include <sphia/set.h>
 

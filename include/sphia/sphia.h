@@ -11,8 +11,6 @@
 extern "C" {
 #endif
 
-#include <sophia/sophia.h>
-
 /**
  * sphia object that manages core sophia environment
  * and database

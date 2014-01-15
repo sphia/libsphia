@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <dirent.h>
-#include <sophia/sophia.h>
+#include <sophia.h>
 #include <sphia/common.h>
 #include <sphia/purge.h>
 #include <str-ends-with/str-ends-with.h>
