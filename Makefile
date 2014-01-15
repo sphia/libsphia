@@ -105,12 +105,11 @@ test: $(TEST_OBJS)
 
 travis:
 	rm -rf sophia
-	git clone --depth=1 https://github.com/larzconwell/sophia.git sophia
+	git clone --depth=1 https://github.com/pmwkaa/sophia.git sophia
 	$(MAKE) -C sophia/db
-	mv sophia/db sophia/sophia
-	rm -f sophia/sophia/*.so*
-	CFLAGS="-Isophia/" LIBRARY_PATH="./sophia/sophia" $(MAKE) deps
-	CFLAGS="-Isophia/" LIBRARY_PATH="./sophia/sophia" $(MAKE) all test
+	rm -f sophia/db/*.so*
+	CFLAGS="-Isophia/db" LIBRARY_PATH="./sophia/db" $(MAKE) deps
+	CFLAGS="-Isophia/db" LIBRARY_PATH="./sophia/db" $(MAKE) all test
 
 clean:
 	@for dep in $(DEPS); do \
