@@ -18,7 +18,7 @@
       "-Wextra",
       "-fvisibility=hidden",
       "-g",
-      "-O2",
+      "-O2"
     ],
     "target_conditions": [
       ["_type=='shared_library'", {
@@ -41,7 +41,7 @@
         "-g",
         "-O2",
         "-fPIC"
-      ],
+      ]
     }
   },
   "targets": [
@@ -83,8 +83,8 @@
       "defines": [
         "DEBUG",
         # TODO: Once Windows support is added, change this.
-        "SPHIA_TEST_DB='/tmp/libsphia-test-db'"
-      ],
+        'SPHIA_TEST_DB="/tmp/libsphia-test-db"'
+      ]
     }
   ]
 }
