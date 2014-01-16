@@ -20,6 +20,7 @@ extern "C" {
 #include "sphia/clear.h"
 #include "sphia/count.h"
 #include "sphia/error.h"
+#include "sphia/iterator.h"
 
 #ifdef __cplusplus
 }

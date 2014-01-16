@@ -15,7 +15,7 @@ main (void) {
   /**
    * Tests to run
    **/
-   
+
   RUN(new);
   RUN(free);
   RUN(get);
@@ -25,10 +25,11 @@ main (void) {
   RUN(count);
   RUN(purge);
   RUN(error);
+  RUN(iterator);
 
   printf("\n-------------------------\n");
   printf("  libsphia test results");
   printf("\n-------------------------");
-  
+
   FOOTER();
 }

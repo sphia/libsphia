@@ -17,6 +17,9 @@ extern "C" {
 # define SPHIA_EXTERN
 #endif
 
+char *
+sphia_strdup (const char *);
+
 #ifdef __cplusplus
 }
 #endif

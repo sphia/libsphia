@@ -54,5 +54,6 @@ TEST(clear);
 TEST(count);
 TEST(purge);
 TEST(error);
+TEST(iterator);
 
 #endif
