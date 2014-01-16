@@ -1,7 +1,4 @@
 {
-  "variables": {
-    "library%": "static_library"
-  },
   "target_defaults": {
     "default_configuration": "Release",
     "configurations": {
@@ -20,11 +17,6 @@
       "-g",
       "-O2"
     ],
-    "target_conditions": [
-      ["_type=='shared_library'", {
-        "cflags": ["-fPIC"]
-      }]
-    ],
     "link_settings": {
       "libraries": ["-lsophia", "-lpthread"]
     },
@@ -40,7 +32,6 @@
         "-fvisibility=hidden",
         "-g",
         "-O2",
-        "-fPIC"
       ]
     }
   },
@@ -48,7 +39,7 @@
     {
       "target_name": "sphia",
       "product_prefix": "lib",
-      "type": "<(library)",
+      "type": "static_library",
       "dependencies": [
         "deps/str-ends-with/str-ends-with.gyp:str-ends-with"
       ],
