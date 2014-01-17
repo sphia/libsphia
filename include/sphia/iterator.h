@@ -11,6 +11,7 @@
 extern "C" {
 #endif
 
+#include <sophia.h>
 #include "common.h"
 #include "sphia.h"
 
