@@ -23,7 +23,8 @@
         "src/new.c",
         "src/purge.c",
         "src/rm.c",
-        "src/set.c"
+        "src/set.c",
+        "src/iterator.c"
       ]
     },
     {
