@@ -17,6 +17,9 @@ VERSION_MINOR = 1
 DEPS = $(shell test -d deps/ && ls deps/)
 DEP_OBJS = $(wildcard deps/*/*.o)
 
+EXAMPLE_SRCS = $(wildcard examples/*.c)
+EXAMPLES = $(EXAMPLE_SRCS:.c=)
+
 TARGET_NAME = lib$(LIB_NAME)
 TARGET_STATIC = $(TARGET_NAME).a
 TARGET_DSOLIB = $(TARGET_NAME).so.$(VERSION_MAJOR).$(VERSION_MINOR)
@@ -103,6 +106,14 @@ test: $(TEST_OBJS)
 		-lsophia -lpthread
 	@./$(TEST_MAIN)
 
+examples: $(EXAMPLES)
+$(EXAMPLES): all
+	@echo "  CC(target) $@.c"
+	@$(CC) ./$(TARGET_STATIC) \
+		-lsophia -lpthread $(CFLAGS) \
+		-DSPHIA_TEST_DB='"$(TEST_DB_PATH)"' \
+		$@.c -o $(@)
+
 travis:
 	rm -rf sophia
 	git clone --depth=1 https://github.com/pmwkaa/sophia.git sophia
@@ -120,11 +131,10 @@ clean:
 		$(TEST_MAIN) $(OBJS) $(TEST_OBJS) $(TARGET_STATIC) \
 		$(TARGET_DSOLIB) $(TARGET_DSO).$(VERSION_MAJOR) \
 		$(TARGET_DSO) $(TARGET_DYLIB) $(TEST_DB_PATH) \
-		test-db sophia output; do \
+		$(EXAMPLES) test-db sophia output; do \
 		echo "  RM $$item"; \
 		$(RM) -rf $$item; \
 	done;
-
 
 install: all
 	test -d $(PREFIX)/$(DESTDIR) || mkdir $(PREFIX)/$(DESTDIR)
@@ -138,4 +148,4 @@ uninstall:
 	rm -f $(PREFIX)/lib/$(TARGET_STATIC)
 	rm -f $(PREFIX)/lib/$(TARGET_DSO)
 
-.PHONY: test deps
+.PHONY: test deps examples
