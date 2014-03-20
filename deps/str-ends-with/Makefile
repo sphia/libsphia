@@ -14,6 +14,6 @@ $(OBJ): $(SRC)
 	$(CC) $(CFLAGS) -c $<
 
 clean:
-	rm -f $(STATIC) $(OBJ)
+	rm -f $(OBJ)
 
 .PHONY: clean
