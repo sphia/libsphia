@@ -31,7 +31,6 @@ sphia_get (sphia_t *self, const char *key) {
     // found
     case 1:
       value = (char *) ref;
-      if ('\0' != value[vsize]) value[vsize] = '\0';
       return value;
   }
 
