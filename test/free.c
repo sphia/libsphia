@@ -15,10 +15,7 @@ TEST(free_new_db);
 
 TEST(free) {
   HEADER(sphia_free);
-
-  RUN(free_empty);
   RUN(free_new_db);
-
   FOOTER();
 }
 
