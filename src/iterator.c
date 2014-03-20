@@ -20,8 +20,6 @@ sphia_iterator_new (sphia_t *self) {
   if (!(iterator = malloc(sizeof(sphia_iterator_t))))
     return NULL;
 
-  memset(iterator, '\0', sizeof(sphia_iterator_t));
-
   if (!(cursor = sp_cursor(self->db, SPGT, NULL, 0))) {
     free(iterator);
     return NULL;
