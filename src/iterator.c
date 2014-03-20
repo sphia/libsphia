@@ -79,12 +79,6 @@ sphia_iterator_next (sphia_iterator_t *self) {
     return NULL;
   }
 
-  if ('\0' != node->key[keysize])
-    node->key[keysize] = '\0';
-
-  if ('\0' != node->value[valuesize])
-    node->value[valuesize] = '\0';
-
   return node;
 }
 
