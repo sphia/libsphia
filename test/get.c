@@ -33,6 +33,7 @@ TEST(get_simple) {
   actual = sphia_get(sphia, key);
   assert(actual);
   assert(0 == strncmp(actual, value, strlen(actual)));
+  free(actual);
   sphia_free(sphia);
   return 0;
 }

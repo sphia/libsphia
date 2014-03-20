@@ -44,21 +44,20 @@ TEST(simple_iterator) {
     char *key = malloc(8);
     sprintf(key, "key%04d", i);
     assert(0 == sphia_set(sphia, key, "value"));
+    free(key);
   }
 
   sphia_iterator_t *iterator = sphia_iterator_new(sphia);
   assert(iterator);
-  sphia_iterator_node_t *node;
 
   for (int i = 0; i < count; i++) {
-    node = sphia_iterator_next(iterator);
+    sphia_iterator_node_t *node = sphia_iterator_next(iterator);
     assert(node);
-
     char *key = malloc(8);
     sprintf(key, "key%04d", i);
     assert(0 == strcmp(node->key, key));
     assert(0 == strcmp(node->value, "value"));
-
+    free(key);
     sphia_iterator_node_free(node);
   }
 

@@ -34,6 +34,7 @@ TEST(simple_clear) {
     char *key = malloc(8);
     sprintf(key, "key%02d", i);
     assert(0 == sphia_set(sphia, key, "value"));
+    free(key);
   }
 
   assert(0 == sphia_clear(sphia));
@@ -56,6 +57,7 @@ TEST(clear_5000_keys) {
     char *key = malloc(8);
     sprintf(key, "key%04d", i);
     assert(0 == sphia_set(sphia, key, "value"));
+    free(key);
   }
 
   assert(5000 == sphia_count(sphia));
