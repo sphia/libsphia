@@ -43,6 +43,7 @@ TEST(simple_count) {
     char *key = malloc(16);
     sprintf(key, "key%03d", i);
     assert(0 == sphia_set(sphia, key, "value"));
+    free(key);
   }
 
   assert(num == sphia_count(sphia));

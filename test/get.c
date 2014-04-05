@@ -5,6 +5,7 @@
  * Copyright (C) 2014 The libsphia Authors <sphia@googlegroups.com>
  */
 
+#include <stdlib.h>
 #include <string.h>
 #include <sphia/sphia.h>
 #include <sphia/new.h>
@@ -33,6 +34,7 @@ TEST(get_simple) {
   actual = sphia_get(sphia, key);
   assert(actual);
   assert(0 == strncmp(actual, value, strlen(actual)));
+  free(actual);
   sphia_free(sphia);
   return 0;
 }

@@ -20,8 +20,10 @@ sphia_iterator_new (sphia_t *self) {
   if (!(iterator = malloc(sizeof(sphia_iterator_t))))
     return NULL;
 
-  cursor = sp_cursor(self->db, SPGT, NULL, 0);
-  if (NULL == cursor) return NULL;
+  if (!(cursor = sp_cursor(self->db, SPGT, NULL, 0))) {
+    free(iterator);
+    return NULL;
+  }
 
   iterator->cursor = cursor;
   iterator->direction = SPGT;
@@ -34,7 +36,7 @@ sphia_iterator_new (sphia_t *self) {
 
 sphia_iterator_node_t *
 sphia_iterator_next (sphia_iterator_t *self) {
-  sphia_iterator_node_t *node;
+  sphia_iterator_node_t *node = NULL;
   size_t keysize = 0;
   size_t valuesize = 0;
   const char *key = NULL;
@@ -74,12 +76,6 @@ sphia_iterator_next (sphia_iterator_t *self) {
     sphia_iterator_node_free(node);
     return NULL;
   }
-
-  if ('\0' != node->key[keysize])
-    node->key[keysize] = '\0';
-
-  if ('\0' != node->value[valuesize])
-    node->value[valuesize] = '\0';
 
   return node;
 }
